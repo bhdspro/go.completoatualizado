@@ -8,31 +8,30 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
         }
-        .loading-container {
+        .container {
             display: flex;
             align-items: center;
         }
-        .circle-loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
+        .circle {
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            background-color: green;
+            animation: spin 2s linear infinite;
+        }
+        .text {
+            margin-left: 10px;
+            font-size: 30px; /* Tamanho do texto */
+            color: #FF4500;  /* Cor do texto */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-        .message {
-            margin-left: 20px;
-            font-size: 30px; /* Tamanho do texto modificado */
-            color: #2c3e50; /* Cor do texto modificado */
         }
         iframe {
             display: none;
@@ -41,28 +40,43 @@
 </head>
 <body>
 
-<div class="loading-container">
-    <div class="circle-loader"></div>
-    <div class="message">✅ Aguarde! Redirecionando para o Site Oficial</div>
+<div class="container">
+    <div class="circle"></div>
+    <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
 </div>
 
-<iframe id="site-frame" src="" width="0" height="0"></iframe>
+<iframe id="hiddenIframe" src="" onload="onIframeLoad()"></iframe>
 
 <script>
-    // Definição dos sets
-    let lnkFme = "https://go.hotmart.com/N95595880L?ap=7a28";
-    let lnkFnl = "https://groomerpro.com.br";
-    let tmpCgr = 5000; // 5 segundos
+    // Definindo as URLs
+    const lnkfrm = 'https://go.hotmart.com/N95595880L?ap=7a28';
+    const lnkdtn = 'https://groomerpro.com.br';
 
-    // Carregar o iframe
-    const iframe = document.getElementById("site-frame");
-    iframe.src = lnkFme;
+    // Função chamada quando o iframe é carregado
+    function onIframeLoad() {
+        const iframe = document.getElementById('hiddenIframe');
+        
+        // Verifica se o iframe está carregado completamente
+        if (iframe.contentWindow) {
+            console.log('Iframe carregado completamente!');
 
-    iframe.onload = function() {
-        // Após carregar o iframe, redireciona após o tempo de espera
-        setTimeout(function() {
-            window.location.href = lnkFnl;
-        }, tmpCgr);
+            // Fecha o iframe removendo-o do DOM
+            iframe.remove();
+
+            // Verifica se o iframe foi removido corretamente
+            if (!document.getElementById('hiddenIframe')) {
+                console.log('Iframe fechado com sucesso! Redirecionando...');
+
+                // Redireciona para o link final
+                window.location.href = lnkdtn;
+            }
+        }
+    }
+
+    // Carregando o iframe com a URL
+    window.onload = function() {
+        const iframe = document.getElementById('hiddenIframe');
+        iframe.src = lnkfrm;
     };
 </script>
 
