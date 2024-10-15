@@ -23,10 +23,11 @@
         .circle {
             width: 30px;
             height: 30px;
+            border: 4px solid green; /* Borda externa */
+            border-top: 4px solid transparent; /* Cor no topo para criar o efeito de carregamento */
             border-radius: 50%;
-            background-color: green;
+            animation: spin 1s linear infinite; /* Animação de rotação */
             margin-right: 10px;
-            animation: spin 2s linear infinite;
         }
 
         @keyframes spin {
