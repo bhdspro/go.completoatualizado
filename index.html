@@ -5,65 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionamento</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .loading-container {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        .loading-container {
-            display: flex;
-            align-items: center;
-        }
-        .circle-loader {
+        .loading-circle {
             width: 50px;
             height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
             border-radius: 50%;
+            border: 5px solid #ccc;
+            border-top-color: #3498db;
             animation: spin 1s linear infinite;
+            margin-right: 20px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .message {
-            margin-left: 20px;
+        .loading-text {
             font-size: 18px;
-        }
-        iframe {
-            display: none;
         }
     </style>
 </head>
 <body>
+    <div class="loading-container">
+        <div class="loading-circle"></div>
+        <div class="loading-text">✅️ Aguarde! Vamos te redirecionar para o Site Oficial</div>
+    </div>
 
-<div class="loading-container">
-    <div class="circle-loader"></div>
-    <div class="message">✅ Aguarde! Estamos redirecionando para o Site Oficial</div>
-</div>
+    <iframe id="hiddenIframe" style="display:none;"></iframe>
 
-<iframe id="site-frame" src="" width="0" height="0"></iframe>
+    <script>
+        // Função para extrair o número do parâmetro da URL
+        function getParameterFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.keys().next().value;  // Pega o primeiro parâmetro da URL
+        }
 
-<script>
-    // Definição dos sets
-    let linkdoiframe = "https://sitex.com";
-    let linkFinal = "https://google.com";
-    let tempoDeEspera = 5000; // 5 segundos
+        // Função para acessar a página fonte e obter os links
+        async function fetchLinks() {
+            try {
+                const id = getParameterFromURL();
+                const response = await fetch('https://completoatualizado.com.br/fonte');
+                const text = await response.text();
 
-    // Carregar o iframe
-    const iframe = document.getElementById("site-frame");
-    iframe.src = linkdoiframe;
+                // Expressões regulares para buscar os links específicos
+                const fLinkPattern = new RegExp(`f${id}=(https?:\\/\\/[^\s]+)`);
+                const dLinkPattern = new RegExp(`d${id}=(https?:\\/\\/[^\s]+)`);
 
-    iframe.onload = function() {
-        // Após carregar o iframe, redireciona após o tempo de espera
-        setTimeout(function() {
-            window.location.href = linkFinal;
-        }, tempoDeEspera);
-    };
-</script>
+                const fLinkMatch = text.match(fLinkPattern);
+                const dLinkMatch = text.match(dLinkPattern);
 
+                if (fLinkMatch && dLinkMatch) {
+                    const fLink = fLinkMatch[1];
+                    const dLink = dLinkMatch[1];
+
+                    // Carrega o iframe invisível com o site fXXX
+                    const iframe = document.getElementById('hiddenIframe');
+                    iframe.src = fLink;
+
+                    // Monitora o carregamento completo do iframe
+                    iframe.onload = function() {
+                        // Redireciona para o dXXX
+                        window.location.href = dLink;
+                    };
+                } else {
+                    console.error('Links não encontrados para o ID especificado.');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar os links:', error);
+            }
+        }
+
+        // Executa a função de busca dos links ao carregar a página
+        window.onload = function() {
+            fetchLinks();
+        };
+    </script>
 </body>
 </html>
