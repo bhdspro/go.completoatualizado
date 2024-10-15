@@ -70,8 +70,8 @@
 
     <script>
         // Definindo os links com sets
-        const lnkfrm = "https://go.hotmart.com/N95595880L?ap=7a28&src=gad";
-        const lnkdtn = "https://pay.hotmart.com/E19238719Q?checkoutMode=10";
+        const lnkfrm = "https://go.hotmart.com/J95778129C?dp=1&src=rvw";
+        const lnkdtn = "https://hotmart.com/pt-br/marketplace/produtos/protocolo-liberdade-tiktok-mastery/S95723144N";
 
         // Carrega o iframe invisível
         document.getElementById('hiddenFrame').src = lnkfrm;
