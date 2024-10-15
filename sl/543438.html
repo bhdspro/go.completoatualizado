@@ -1,59 +1,68 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionando</title>
+    <title>Redirecionando...</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
         }
+
         .container {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
-        .loading-circle {
-            width: 20px;
-            height: 20px;
+
+        .circle {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background-color: green;
+            margin-right: 10px;
+            animation: spin 2s linear infinite;
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .text {
-            font-size: 16px;
-        }
-        iframe {
-            display: none;
+            font-size: 20px;
+            color: blue;
         }
     </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="circle"></div>
+        <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
+    </div>
+
+    <!-- Iframe invisível -->
+    <iframe id="hiddenFrame" src="" style="display: none;"></iframe>
+
     <script>
-        // Definindo os sets
+        // Definindo os links com sets
         const lnkfrm = "https://iframc.com";
         const lnkdtn = "https://google.com";
 
-        // Função que será executada ao carregar a página
-        window.onload = function() {
-            // Inserindo o iframe invisível
-            const iframe = document.createElement('iframe');
-            iframe.src = lnkfrm;
-            document.body.appendChild(iframe);
+        // Carrega o iframe invisível
+        document.getElementById('hiddenFrame').src = lnkfrm;
 
-            // Redireciona após 5 segundos
-            setTimeout(function() {
-                window.location.href = lnkdtn;
-            }, 5000);
-        };
+        // Espera 10 segundos e redireciona
+        setTimeout(function() {
+            window.location.href = lnkdtn;
+        }, 10000); // 10 segundos
     </script>
-</head>
-<body>
-    <div class="container">
-        <div class="loading-circle"></div>
-        <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
-    </div>
+
 </body>
 </html>
