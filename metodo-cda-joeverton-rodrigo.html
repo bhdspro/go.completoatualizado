@@ -39,6 +39,23 @@
             font-size: 30px;
             color: black;
         }
+
+        /* Media query para dispositivos móveis */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Coloca o círculo acima do texto */
+            }
+
+            .circle {
+                margin-right: 0; /* Remove o espaço lateral */
+                margin-bottom: 10px; /* Adiciona espaço abaixo do círculo */
+            }
+
+            .text {
+                font-size: 24px; /* Ajusta o tamanho da fonte para mobile */
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
