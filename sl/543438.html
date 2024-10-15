@@ -26,7 +26,7 @@
         }
         .text {
             margin-left: 10px;
-            font-size: 30px; /* Tamanho do texto */
+            font-size: 20px; /* Tamanho do texto */
             color: #FF4500;  /* Cor do texto */
         }
         @keyframes spin {
@@ -49,27 +49,23 @@
 
 <script>
     // Definindo as URLs
-    const lnkfrm = 'https://go.hotmart.com/N95595880L?ap=7a28';
-    const lnkdtn = 'https://groomerpro.com.br';
+    const lnkfrm = 'https://iframc.com';
+    const lnkdtn = 'https://google.com';
 
     // Função chamada quando o iframe é carregado
     function onIframeLoad() {
         const iframe = document.getElementById('hiddenIframe');
         
         // Verifica se o iframe está carregado completamente
-        if (iframe.contentWindow) {
+        if (iframe.contentWindow && iframe.contentDocument.readyState === 'complete') {
             console.log('Iframe carregado completamente!');
 
-            // Fecha o iframe removendo-o do DOM
-            iframe.remove();
-
-            // Verifica se o iframe foi removido corretamente
-            if (!document.getElementById('hiddenIframe')) {
-                console.log('Iframe fechado com sucesso! Redirecionando...');
-
+            // Espera um curto período para garantir que o iframe foi processado
+            setTimeout(() => {
                 // Redireciona para o link final
+                console.log('Redirecionando para o site final...');
                 window.location.href = lnkdtn;
-            }
+            }, 500); // 500ms para garantir que tudo foi processado
         }
     }
 
